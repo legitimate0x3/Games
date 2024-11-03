@@ -1,0 +1,137 @@
+-- Legit-GDumper by legitimate0x1!
+
+-- Path --> Workspace.14dEmON_hErE.Building Tools.Interfaces.BTHSVColorPicker.[Component]
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/wyButjTMhM)
+-- Decompiled on 2024-11-03 06:29:41
+-- Luau version 6, Types version 3
+-- Time taken: 0.003647 seconds
+
+while not _G.GetLibraries do
+	wait()
+end
+local _G_GetLibraries_result1_upvr, _G_GetLibraries_result2_upvr = _G.GetLibraries("F3X/SupportLibrary@^1.0.0", "F3X/Cheer@^0.0.0")
+local Parent_upvr = script.Parent
+local any_CreateComponent_result1_upvr = _G_GetLibraries_result2_upvr.CreateComponent("BTHSVColorPicker", Parent_upvr)
+local tbl_upvr = {}
+function any_CreateComponent_result1_upvr.Start(arg1, arg2, arg3, arg4) -- Line 13
+	--[[ Upvalues[5]:
+		[1]: Parent_upvr (readonly)
+		[2]: _G_GetLibraries_result2_upvr (readonly)
+		[3]: tbl_upvr (readonly)
+		[4]: _G_GetLibraries_result1_upvr (readonly)
+		[5]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	Parent_upvr.Visible = true
+	local var6 = arg1
+	if not var6 then
+		var6 = Color3.new(1, 1, 1)
+	end
+	local Color3_toHSV_result1, Color3_toHSV_result2, Color3_toHSV_result3 = Color3.toHSV(var6)
+	Hue = Color3_toHSV_result1 -- Setting global
+	Saturation = Color3_toHSV_result2 -- Setting global
+	Brightness = Color3_toHSV_result3 -- Setting global
+	Hue = _G_GetLibraries_result2_upvr.Link(Hue) -- Setting global
+	Saturation = _G_GetLibraries_result2_upvr.Link(Saturation) -- Setting global
+	Brightness = _G_GetLibraries_result2_upvr.Link(Brightness) -- Setting global
+	_G_GetLibraries_result2_upvr.Bind(Parent_upvr.HueOption.Input, {_G_GetLibraries_result2_upvr.Clamp(0, 360), _G_GetLibraries_result2_upvr.Divide(360)}, Hue)
+	_G_GetLibraries_result2_upvr.Bind(Parent_upvr.SaturationOption.Input, {_G_GetLibraries_result2_upvr.Clamp(0, 100), _G_GetLibraries_result2_upvr.Divide(100)}, Saturation)
+	_G_GetLibraries_result2_upvr.Bind(Parent_upvr.BrightnessOption.Input, {_G_GetLibraries_result2_upvr.Clamp(0, 100), _G_GetLibraries_result2_upvr.Divide(100)}, Brightness)
+	_G_GetLibraries_result2_upvr.Bind(Hue, {_G_GetLibraries_result2_upvr.Multiply(360), _G_GetLibraries_result2_upvr.Round(0)}, Parent_upvr.HueOption.Input):Trigger()
+	_G_GetLibraries_result2_upvr.Bind(Saturation, {_G_GetLibraries_result2_upvr.Multiply(100), _G_GetLibraries_result2_upvr.Round(0), tostring, _G_GetLibraries_result2_upvr.Append('%')}, Parent_upvr.SaturationOption.Input):Trigger()
+	_G_GetLibraries_result2_upvr.Bind(Brightness, {_G_GetLibraries_result2_upvr.Multiply(100), _G_GetLibraries_result2_upvr.Round(0), tostring, _G_GetLibraries_result2_upvr.Append('%')}, Parent_upvr.BrightnessOption.Input):Trigger()
+	_G_GetLibraries_result2_upvr.Bind(Hue, UpdateDisplay):Trigger()
+	_G_GetLibraries_result2_upvr.Bind(Saturation, UpdateDisplay):Trigger()
+	_G_GetLibraries_result2_upvr.Bind(Brightness, UpdateDisplay):Trigger()
+	tbl_upvr.TrackColor = _G_GetLibraries_result1_upvr.AddGuiInputListener(Parent_upvr.HueSaturation, "Began", "MouseButton1", true, _G_GetLibraries_result1_upvr.Call(StartTrackingMouse, "HS"))
+	tbl_upvr.TrackBrightness = _G_GetLibraries_result1_upvr.AddGuiInputListener(Parent_upvr.Brightness, "Began", "MouseButton1", true, _G_GetLibraries_result1_upvr.Call(StartTrackingMouse, 'B'))
+	tbl_upvr.StopTrackingMouse = _G_GetLibraries_result1_upvr.AddUserInputListener("Ended", "MouseButton1", true, StopTrackingMouse)
+	_G_GetLibraries_result2_upvr.Bind(Parent_upvr.OkButton, function() -- Line 44
+		--[[ Upvalues[3]:
+			[1]: arg4 (readonly)
+			[2]: Parent_upvr (copied, readonly)
+			[3]: arg2 (readonly)
+		]]
+		if arg4 then
+			arg4()
+		end
+		Parent_upvr:Destroy()
+		arg2(Color3.fromHSV(#Hue, #Saturation, #Brightness))
+	end)
+	_G_GetLibraries_result2_upvr.Bind(Parent_upvr.CancelButton, function() -- Line 60
+		--[[ Upvalues[2]:
+			[1]: arg4 (readonly)
+			[2]: Parent_upvr (copied, readonly)
+		]]
+		if arg4 then
+			arg4()
+		end
+		Parent_upvr:Destroy()
+	end)
+	any_CreateComponent_result1_upvr.SelectionPreventionCallback = arg3
+	any_CreateComponent_result1_upvr.PreviewCallback = arg4
+	_G_GetLibraries_result2_upvr.Bind(any_CreateComponent_result1_upvr.OnRemove, ClearConnections)
+end
+function StartTrackingMouse(arg1) -- Line 71
+	--[[ Upvalues[4]:
+		[1]: tbl_upvr (readonly)
+		[2]: _G_GetLibraries_result1_upvr (readonly)
+		[3]: Parent_upvr (readonly)
+		[4]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	if tbl_upvr.MouseTracking then
+	else
+		tbl_upvr.MouseTracking = _G_GetLibraries_result1_upvr.AddUserInputListener("Changed", "MouseMovement", true, function(arg1_2) -- Line 79
+			--[[ Upvalues[3]:
+				[1]: arg1 (readonly)
+				[2]: _G_GetLibraries_result1_upvr (copied, readonly)
+				[3]: Parent_upvr (copied, readonly)
+			]]
+			if arg1 == "HS" then
+				Hue("Update", _G_GetLibraries_result1_upvr.Clamp((arg1_2.Position.X - Parent_upvr.HueSaturation.AbsolutePosition.X) / Parent_upvr.HueSaturation.AbsoluteSize.X, 0, 1))
+				Saturation("Update", 1 - _G_GetLibraries_result1_upvr.Clamp((arg1_2.Position.Y - Parent_upvr.HueSaturation.AbsolutePosition.Y) / Parent_upvr.HueSaturation.AbsoluteSize.Y, 0, 1))
+			elseif arg1 == 'B' then
+				Brightness("Update", 1 - _G_GetLibraries_result1_upvr.Clamp((arg1_2.Position.Y - Parent_upvr.Brightness.AbsolutePosition.Y) / Parent_upvr.Brightness.AbsoluteSize.Y, 0, 1))
+			end
+		end)
+		if any_CreateComponent_result1_upvr.SelectionPreventionCallback then
+			any_CreateComponent_result1_upvr.SelectionPreventionCallback()
+		end
+	end
+end
+function StopTrackingMouse() -- Line 100
+	--[[ Upvalues[1]:
+		[1]: tbl_upvr (readonly)
+	]]
+	if not tbl_upvr.MouseTracking then
+	else
+		tbl_upvr.MouseTracking:Disconnect()
+		tbl_upvr.MouseTracking = nil
+	end
+end
+function UpdateDisplay() -- Line 114
+	--[[ Upvalues[2]:
+		[1]: Parent_upvr (readonly)
+		[2]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	local Color3_fromHSV_result1 = Color3.fromHSV(#Hue, #Saturation, #Brightness)
+	Parent_upvr.ColorDisplay.BackgroundColor3 = Color3_fromHSV_result1
+	Parent_upvr.HueOption.Bar.BackgroundColor3 = Color3_fromHSV_result1
+	Parent_upvr.SaturationOption.Bar.BackgroundColor3 = Color3_fromHSV_result1
+	Parent_upvr.BrightnessOption.Bar.BackgroundColor3 = Color3_fromHSV_result1
+	Parent_upvr.HueSaturation.Cursor.Position = UDim2.new(#Hue, Parent_upvr.HueSaturation.Cursor.Position.X.Offset, 1 - #Saturation, Parent_upvr.HueSaturation.Cursor.Position.Y.Offset)
+	Parent_upvr.Brightness.ColorBG.BackgroundColor3 = Color3_fromHSV_result1
+	Parent_upvr.Brightness.Cursor.Position = UDim2.new(Parent_upvr.Brightness.Cursor.Position.X.Scale, Parent_upvr.Brightness.Cursor.Position.X.Offset, 1 - #Brightness, Parent_upvr.Brightness.Cursor.Position.Y.Offset)
+	if any_CreateComponent_result1_upvr.PreviewCallback then
+		any_CreateComponent_result1_upvr.PreviewCallback(Color3_fromHSV_result1)
+	end
+end
+function ClearConnections() -- Line 146
+	--[[ Upvalues[1]:
+		[1]: tbl_upvr (readonly)
+	]]
+	for i, v in pairs(tbl_upvr) do
+		v:Disconnect()
+		tbl_upvr[i] = nil
+	end
+end
+return any_CreateComponent_result1_upvr

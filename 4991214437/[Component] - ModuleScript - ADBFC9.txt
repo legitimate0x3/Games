@@ -1,0 +1,140 @@
+-- Legit-GDumper by legitimate0x1!
+
+-- Path --> Players.Oscaro394.Backpack.Building Tools.Interfaces.Dock.ToolInformation.[Component]
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/wyButjTMhM)
+-- Decompiled on 2024-11-03 06:43:34
+-- Luau version 6, Types version 3
+-- Time taken: 0.002050 seconds
+
+local Parent_upvr = script.Parent
+while not _G.GetLibraries do
+	wait()
+end
+local _G_GetLibraries_result1, _G_GetLibraries_result2_upvr = _G.GetLibraries("F3X/SupportLibrary@^1.0.0", "F3X/Cheer@^0.0.0")
+_G_GetLibraries_result1.ImportServices()
+local any_CreateComponent_result1_upvr = _G_GetLibraries_result2_upvr.CreateComponent("BTToolInformationManager", Parent_upvr)
+function any_CreateComponent_result1_upvr.Start(arg1) -- Line 16
+	--[[ Upvalues[1]:
+		[1]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	getfenv(1).Core = arg1
+	return any_CreateComponent_result1_upvr
+end
+function any_CreateComponent_result1_upvr.RegisterSection(arg1) -- Line 26
+	--[[ Upvalues[2]:
+		[1]: any_CreateComponent_result1_upvr (readonly)
+		[2]: _G_GetLibraries_result2_upvr (readonly)
+	]]
+	local any_GetSection_result1_upvr = any_CreateComponent_result1_upvr.GetSection(arg1)
+	_G_GetLibraries_result2_upvr.Bind(any_GetSection_result1_upvr.MouseEnter, function() -- Line 33
+		--[[ Upvalues[2]:
+			[1]: any_CreateComponent_result1_upvr (copied, readonly)
+			[2]: any_GetSection_result1_upvr (readonly)
+		]]
+		if any_CreateComponent_result1_upvr.CurrentSection == any_GetSection_result1_upvr then
+			any_CreateComponent_result1_upvr.CurrentFadeTimer = false
+		end
+	end)
+	_G_GetLibraries_result2_upvr.Bind(any_GetSection_result1_upvr.MouseLeave, function() -- Line 40
+		--[[ Upvalues[1]:
+			[1]: any_CreateComponent_result1_upvr (copied, readonly)
+		]]
+		any_CreateComponent_result1_upvr.StartFadeTimer(true)
+	end)
+end
+function any_CreateComponent_result1_upvr.StartFadeTimer(arg1) -- Line 46
+	--[[ Upvalues[1]:
+		[1]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	if any_CreateComponent_result1_upvr.CurrentFadeTimer == false and not arg1 then
+	else
+		local HttpService_GenerateGUID_result1_upvr = HttpService:GenerateGUID()
+		any_CreateComponent_result1_upvr.CurrentFadeTimer = HttpService_GenerateGUID_result1_upvr
+		Delay(2, function() -- Line 60
+			--[[ Upvalues[2]:
+				[1]: any_CreateComponent_result1_upvr (copied, readonly)
+				[2]: HttpService_GenerateGUID_result1_upvr (readonly)
+			]]
+			if any_CreateComponent_result1_upvr.CurrentFadeTimer == HttpService_GenerateGUID_result1_upvr then
+				any_CreateComponent_result1_upvr.HideCurrentSection()
+			end
+		end)
+	end
+end
+function any_CreateComponent_result1_upvr.StartShowTimer(arg1) -- Line 68
+	--[[ Upvalues[1]:
+		[1]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	if any_CreateComponent_result1_upvr.LastTrigger == "Click" then
+	else
+		local HttpService_GenerateGUID_result1_upvr_2 = HttpService:GenerateGUID()
+		any_CreateComponent_result1_upvr.CurrentShowTimer = HttpService_GenerateGUID_result1_upvr_2
+		Delay(0.25, function() -- Line 83
+			--[[ Upvalues[3]:
+				[1]: any_CreateComponent_result1_upvr (copied, readonly)
+				[2]: HttpService_GenerateGUID_result1_upvr_2 (readonly)
+				[3]: arg1 (readonly)
+			]]
+			if any_CreateComponent_result1_upvr.CurrentShowTimer == HttpService_GenerateGUID_result1_upvr_2 then
+				any_CreateComponent_result1_upvr.ShowSection(arg1, "Hover")
+				any_CreateComponent_result1_upvr.StartFadeTimer()
+			end
+		end)
+	end
+end
+function any_CreateComponent_result1_upvr.ProcessHover(arg1, arg2) -- Line 92
+	--[[ Upvalues[1]:
+		[1]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	if any_CreateComponent_result1_upvr.LastTrigger == "Click" then
+	else
+		wait()
+		any_CreateComponent_result1_upvr.StartShowTimer(arg2)
+	end
+end
+function any_CreateComponent_result1_upvr.ShowSection(arg1, arg2) -- Line 106
+	--[[ Upvalues[1]:
+		[1]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	any_CreateComponent_result1_upvr.HideCurrentSection()
+	local any_GetSection_result1 = any_CreateComponent_result1_upvr.GetSection(arg1)
+	any_CreateComponent_result1_upvr.CurrentSection = any_GetSection_result1
+	any_CreateComponent_result1_upvr.LastTrigger = arg2
+	any_GetSection_result1.Visible = true
+end
+function any_CreateComponent_result1_upvr.ProcessUnhover(arg1, arg2) -- Line 123
+	--[[ Upvalues[1]:
+		[1]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	any_CreateComponent_result1_upvr.CurrentShowTimer = nil
+	if any_CreateComponent_result1_upvr.LastTrigger == "Click" then
+	elseif any_CreateComponent_result1_upvr.CurrentSection == any_CreateComponent_result1_upvr.GetSection(arg2) then
+		any_CreateComponent_result1_upvr.StartFadeTimer()
+	end
+end
+function any_CreateComponent_result1_upvr.ProcessClick(arg1, arg2) -- Line 143
+	--[[ Upvalues[1]:
+		[1]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	any_CreateComponent_result1_upvr.ShowSection(arg2, "Click")
+	any_CreateComponent_result1_upvr.StartFadeTimer()
+end
+function any_CreateComponent_result1_upvr.HideCurrentSection() -- Line 153
+	--[[ Upvalues[1]:
+		[1]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	if not any_CreateComponent_result1_upvr.CurrentSection then
+	else
+		any_CreateComponent_result1_upvr.CurrentSection.Visible = false
+		any_CreateComponent_result1_upvr.CurrentFadeTimer = nil
+		any_CreateComponent_result1_upvr.CurrentSection = nil
+		any_CreateComponent_result1_upvr.LastTrigger = nil
+	end
+end
+function any_CreateComponent_result1_upvr.GetSection(arg1) -- Line 172
+	--[[ Upvalues[1]:
+		[1]: Parent_upvr (readonly)
+	]]
+	return Parent_upvr:FindFirstChild(arg1)
+end
+return any_CreateComponent_result1_upvr
