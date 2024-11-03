@@ -1,0 +1,36 @@
+-- Legit-GDumper by legitimate0x1!
+
+-- Path --> Workspace.Vehicle.Humvee-SCPF.Humvee Light Armoured.A-Chassis Tune.A-Chassis Interface.AC6_Stock_Sound
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/wyButjTMhM)
+-- Decompiled on 2024-11-03 06:27:42
+-- Luau version 6, Types version 3
+-- Time taken: 0.001009 seconds
+
+-- KONSTANTERROR: [0] 1. Error Block 39 start (CF ANALYSIS FAILED)
+local Value = script.Parent.Car.Value
+local AC6_FE_Sounds = Value:WaitForChild("AC6_FE_Sounds")
+script:WaitForChild("Rev")
+for _, v in pairs(Value.DriveSeat:GetChildren()) do
+	for _, v_2 in pairs(script:GetChildren()) do
+		if v.Name == v_2.Name then
+			v:Stop()
+			wait()
+			v:Destroy()
+		end
+	end
+end
+AC6_FE_Sounds:FireServer("newSound", "Rev", Value.DriveSeat, script.Rev.SoundId, 0, script.Rev.Volume, true)
+AC6_FE_Sounds:FireServer("playSound", "Rev")
+Value.DriveSeat:WaitForChild("Rev")
+-- KONSTANTERROR: [0] 1. Error Block 39 end (CF ANALYSIS FAILED)
+-- KONSTANTERROR: [200] 127. Error Block 46 start (CF ANALYSIS FAILED)
+if workspace.FilteringEnabled then
+	AC6_FE_Sounds:FireServer("updateSound", "Rev", script.Rev.SoundId, math.max((script.Rev.SetPitch.Value + script.Rev.SetRev.Value * Value.DriveSeat:WaitForChild("Rev") / require(Value["A-Chassis Tune"]).Redline) * 1 ^ 2, script.Rev.SetPitch.Value), script.Rev.Volume)
+else
+	-- KONSTANTERROR: Expression was reused, decompilation is incorrect
+	Value.DriveSeat.Rev.Pitch = math.max((script.Rev.SetPitch.Value + script.Rev.SetRev.Value * Value.DriveSeat:WaitForChild("Rev") / require(Value["A-Chassis Tune"]).Redline) * 1 ^ 2, script.Rev.SetPitch.Value)
+end
+-- KONSTANTERROR: [200] 127. Error Block 46 end (CF ANALYSIS FAILED)
+-- KONSTANTERROR: [100] 65. Error Block 8 start (CF ANALYSIS FAILED)
+-- KONSTANTERROR: Expression was reused, decompilation is incorrect
+-- KONSTANTERROR: [100] 65. Error Block 8 end (CF ANALYSIS FAILED)

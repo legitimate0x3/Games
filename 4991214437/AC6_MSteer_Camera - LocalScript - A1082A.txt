@@ -1,0 +1,42 @@
+-- Legit-GDumper by legitimate0x1!
+
+-- Path --> Workspace.Vehicle.Humvee-SCPF.Humvee Light Armoured.A-Chassis Tune.A-Chassis Interface.AC6_MSteer_Camera
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/wyButjTMhM)
+-- Decompiled on 2024-11-03 06:27:41
+-- Luau version 6, Types version 3
+-- Time taken: 0.000955 seconds
+
+local Value_upvr = script.Parent.Car.Value
+local CurrentCamera_upvr = workspace.CurrentCamera
+local RunService_upvr = game:GetService("RunService")
+Value_upvr.DriveSeat.ChildRemoved:connect(function(arg1) -- Line 13
+	--[[ Upvalues[2]:
+		[1]: RunService_upvr (readonly)
+		[2]: CurrentCamera_upvr (readonly)
+	]]
+	if arg1.Name == "SeatWeld" then
+		RunService_upvr:UnbindFromRenderStep("MCam")
+		CurrentCamera_upvr.CameraType = Enum.CameraType.Custom
+	end
+end)
+script.Parent.Values.MouseSteerOn.Changed:connect(function(arg1) -- Line 20
+	--[[ Upvalues[3]:
+		[1]: RunService_upvr (readonly)
+		[2]: CurrentCamera_upvr (readonly)
+		[3]: Value_upvr (readonly)
+	]]
+	if script.Parent.Values.MouseSteerOn.Value then
+		RunService_upvr:BindToRenderStep("MCam", Enum.RenderPriority.Camera.Value, function() -- Line 22
+			--[[ Upvalues[2]:
+				[1]: CurrentCamera_upvr (copied, readonly)
+				[2]: Value_upvr (copied, readonly)
+			]]
+			CurrentCamera_upvr.CameraType = Enum.CameraType.Scriptable
+			local minimum = math.min(1, Value_upvr.DriveSeat.Velocity.Magnitude / 500)
+			CurrentCamera_upvr.CoordinateFrame = CFrame.new(Value_upvr.DriveSeat.Position + Vector3.new(0, 8 + minimum * 2, 0) - Value_upvr.DriveSeat.CFrame.lookVector * 17 + Value_upvr.DriveSeat.Velocity.Unit * -7 * minimum, Value_upvr.DriveSeat.Position)
+		end)
+	else
+		RunService_upvr:UnbindFromRenderStep("MCam")
+		CurrentCamera_upvr.CameraType = Enum.CameraType.Custom
+	end
+end)

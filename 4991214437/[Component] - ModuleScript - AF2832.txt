@@ -1,0 +1,69 @@
+-- Legit-GDumper by legitimate0x1!
+
+-- Path --> Workspace.Skelett939.Building Tools.Interfaces.BTSurfaceToolGUI.SideOption.Dropdown.[Component]
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/wyButjTMhM)
+-- Decompiled on 2024-11-03 06:56:11
+-- Luau version 6, Types version 3
+-- Time taken: 0.001592 seconds
+
+local Parent_upvr = script.Parent
+while not _G.GetLibraries do
+	wait()
+end
+local _, _G_GetLibraries_result2_upvr = _G.GetLibraries("F3X/SupportLibrary@^1.0.0", "F3X/Cheer@^0.0.0")
+local any_CreateComponent_result1_upvr = _G_GetLibraries_result2_upvr.CreateComponent("BTDropdown", Parent_upvr)
+function any_CreateComponent_result1_upvr.Start(arg1, arg2, arg3) -- Line 13
+	--[[ Upvalues[3]:
+		[1]: _G_GetLibraries_result2_upvr (readonly)
+		[2]: Parent_upvr (readonly)
+		[3]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	_G_GetLibraries_result2_upvr.Bind(Parent_upvr, any_CreateComponent_result1_upvr.Toggle)
+	any_CreateComponent_result1_upvr.Draw(arg1, arg2, arg3)
+	return any_CreateComponent_result1_upvr
+end
+function any_CreateComponent_result1_upvr.Toggle() -- Line 26
+	--[[ Upvalues[1]:
+		[1]: Parent_upvr (readonly)
+	]]
+	for _, v in pairs(Parent_upvr.Options:GetChildren()) do
+		v.Visible = not v.Visible
+	end
+end
+function any_CreateComponent_result1_upvr.SetOption(arg1) -- Line 37
+	--[[ Upvalues[1]:
+		[1]: Parent_upvr (readonly)
+	]]
+	Parent_upvr.CurrentOption.Text = arg1:upper()
+end
+function any_CreateComponent_result1_upvr.Draw(arg1, arg2, arg3) -- Line 45
+	--[[ Upvalues[2]:
+		[1]: Parent_upvr (readonly)
+		[2]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	Parent_upvr.Options:ClearAllChildren()
+	for i_2, v_2_upvr in ipairs(arg1) do
+		local clone = Parent_upvr.OptionButton:Clone()
+		clone.Parent = Parent_upvr.Options
+		clone.OptionLabel.Text = v_2_upvr:upper()
+		clone.MouseButton1Click:Connect(function() -- Line 58
+			--[[ Upvalues[3]:
+				[1]: arg3 (readonly)
+				[2]: v_2_upvr (readonly)
+				[3]: any_CreateComponent_result1_upvr (copied, readonly)
+			]]
+			arg3(v_2_upvr)
+			any_CreateComponent_result1_upvr.SetOption(v_2_upvr)
+			any_CreateComponent_result1_upvr.Toggle()
+		end)
+		local Offset = clone.Position.X.Offset
+		if i_2 % 9 == 0 then
+			Offset = 9
+		else
+			Offset = i_2 % 9
+		end
+		clone.Position = UDim2.new(math.ceil(i_2 / 9) - 1, Offset + math.ceil(i_2 / 9) * -1 + 1, Offset * clone.Size.Y.Scale, clone.Position.Y.Offset)
+	end
+	Parent_upvr.Visible = true
+end
+return any_CreateComponent_result1_upvr
