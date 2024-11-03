@@ -1,0 +1,51 @@
+-- Legit-GDumper by legitimate0x1!
+
+-- Path --> Players.Oscaro394.Backpack.Building Tools.Interfaces.Notifications.[Component]
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/wyButjTMhM)
+-- Decompiled on 2024-11-03 06:43:45
+-- Luau version 6, Types version 3
+-- Time taken: 0.001097 seconds
+
+local Parent_upvr = script.Parent
+while not _G.GetLibraries do
+	wait()
+end
+local _G_GetLibraries_result1, _G_GetLibraries_result2_upvr = _G.GetLibraries("F3X/SupportLibrary@^1.0.0", "F3X/Cheer@^0.0.0")
+local any_CreateComponent_result1_upvr = _G_GetLibraries_result2_upvr.CreateComponent("BTNotificationsManager", Parent_upvr)
+function any_CreateComponent_result1_upvr.Start(arg1) -- Line 13
+	--[[ Upvalues[3]:
+		[1]: _G_GetLibraries_result2_upvr (readonly)
+		[2]: Parent_upvr (readonly)
+		[3]: any_CreateComponent_result1_upvr (readonly)
+	]]
+	if arg1.IsVersionOutdated() then
+		if arg1.Mode == "Plugin" then
+			_G_GetLibraries_result2_upvr(Parent_upvr.PluginUpdateNotification).Start(any_CreateComponent_result1_upvr.AdjustLayout)
+		elseif arg1.Mode == "Tool" then
+			_G_GetLibraries_result2_upvr(Parent_upvr.ToolUpdateNotification).Start(any_CreateComponent_result1_upvr.AdjustLayout)
+		end
+	end
+	if not arg1.SyncAPI:Invoke("IsHttpServiceEnabled") then
+		_G_GetLibraries_result2_upvr(Parent_upvr.HttpDisabledWarning).Start(any_CreateComponent_result1_upvr.AdjustLayout)
+	end
+	Parent_upvr.UIListLayout:ApplyLayout()
+	Parent_upvr.Position = UDim2.new(0.5, 0, 1.5, 0)
+	Parent_upvr.Visible = true
+	Parent_upvr:TweenPosition(UDim2.new(0.5, 0, 0.5, 0), nil, nil, 0.2)
+	spawn(function() -- Line 38
+		--[[ Upvalues[2]:
+			[1]: arg1 (readonly)
+			[2]: Parent_upvr (copied, readonly)
+		]]
+		arg1.Disabling:Wait()
+		Parent_upvr:Destroy()
+	end)
+	return any_CreateComponent_result1_upvr
+end
+function any_CreateComponent_result1_upvr.AdjustLayout() -- Line 48
+	--[[ Upvalues[1]:
+		[1]: Parent_upvr (readonly)
+	]]
+	Parent_upvr.UIListLayout:ApplyLayout()
+end
+return any_CreateComponent_result1_upvr
